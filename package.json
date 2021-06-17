@@ -1,0 +1,26 @@
+{
+	"name": "route-tokenizer",
+	"type": "module",
+	"main": "index.js",
+	"description": "Path tokenizer for routers",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thoughtsunificator/route-tokenizer.git"
+	},
+	"bugs": {
+		"url": "https://github.com/thoughtsunificator/route-tokenizer/issues"
+	},
+	"author": "Romain Lebesle <oss@thoughtsunificator.me> (https://thoughtsunificator.me)",
+	"license": "MIT",
+	"scripts": {
+		"test": "nodeunit-esm",
+		"generate-docs": "jsdoc --configure .jsdoc.json --verbose",
+		"lint": "eslint src/**/*.js"
+	},
+	"devDependencies": {
+		"docdash": "^1.2.0",
+		"eslint": "^7.28.0",
+		"jsdoc": "^3.6.7",
+		"nodeunit-esm": "^1.0.2"
+	}
+}
