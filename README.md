@@ -15,8 +15,3 @@ Path tokenizer for routers
 ### API
 
 See [https://thoughtsunificator.github.io/route-tokenizer](https://thoughtsunificator.github.io/route-tokenizer).
-
-## Testing
-
-- ``npm install``
-- ``npm test``
