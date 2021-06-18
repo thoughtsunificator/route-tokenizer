@@ -10,7 +10,7 @@ Path tokenizer for routers
 ### Usage
 
 ````javascript
-  Tokenizer.tokenize("/account/{id}")
+const tokens = Tokenizer.tokenize("/account/{id}")
 ````
 ### API
 
