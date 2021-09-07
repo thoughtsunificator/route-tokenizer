@@ -1,5 +1,4 @@
-import Tokenizer from "../src/tokenizer.js"
-import Token from "../src/token.js"
+import { Tokenizer, Token } from "../index.js"
 
 export function schema(test) {
 	test.expect(7)

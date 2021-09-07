@@ -1,4 +1,4 @@
-import Token from "../src/token.js"
+import { Token } from "../index.js"
 
 export function types(test) {
 	test.expect(3)
