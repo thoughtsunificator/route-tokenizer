@@ -5,11 +5,14 @@ Path tokenizer for routers
 
 ### Installing
 
-``npm install route-tokenizer``
+``npm install @thoughtsunificator/route-tokenizer``
 
 ### Usage
 
 ````javascript
+import { Tokenizer } from "@thoughtsunificator/route-tokenizer"
+
+
 const tokens = Tokenizer.tokenize("/account/{id}")
 ````
 ### API
