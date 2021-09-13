@@ -1,5 +1,5 @@
 {
-	"name": "route-tokenizer",
+	"name": "@thoughtsunificator/route-tokenizer",
 	"type": "module",
 	"main": "index.js",
 	"version": "0.0.2",
