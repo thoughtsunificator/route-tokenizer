@@ -2,7 +2,7 @@
 	"name": "@thoughtsunificator/route-tokenizer",
 	"type": "module",
 	"main": "index.js",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "Path tokenizer for routers",
 	"repository": {
 		"type": "git",
