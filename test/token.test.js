@@ -1,18 +1,19 @@
+import assert from "assert"
 import { Token } from "../index.js"
 
-export function types(test) {
-	test.expect(3)
-	test.strictEqual(Token.TYPE.PATH, "PATH")
-	test.strictEqual(Token.TYPE.PARAMETER, "PARAMETER")
-	test.strictEqual(Token.TYPE.SEPARATOR, "SEPARATOR")
-	test.done()
-}
+describe("token", () => {
 
-export function instance(test) {
-	test.expect(3)
-	const route = new Token(Token.TYPE.PATH, "test", 1)
-	test.strictEqual(route.type, Token.TYPE.PATH)
-	test.deepEqual(route.buffer, "test")
-	test.deepEqual(route.bufferIndex, 1)
-	test.done()
-}
+	it("types", () => {
+		assert.strictEqual(Token.TYPE.PATH, "PATH")
+		assert.strictEqual(Token.TYPE.PARAMETER, "PARAMETER")
+		assert.strictEqual(Token.TYPE.SEPARATOR, "SEPARATOR")
+	})
+
+	it("instance", () => {
+		const route = new Token(Token.TYPE.PATH, "test", 1)
+		assert.strictEqual(route.type, Token.TYPE.PATH)
+		assert.deepEqual(route.buffer, "test")
+		assert.deepEqual(route.bufferIndex, 1)
+	})
+
+})

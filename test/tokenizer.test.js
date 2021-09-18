@@ -1,74 +1,67 @@
+import assert from "assert"
 import { Tokenizer, Token } from "../index.js"
 
-export function schema(test) {
-	test.expect(7)
-	const tokens = Tokenizer.tokenize("/test/{xtest}")
-	test.ok(tokens instanceof Array)
-	test.strictEqual(Object.hasOwnProperty.call(tokens[0], "_bufferIndex"), true)
-	test.strictEqual(Object.hasOwnProperty.call(tokens[0], "_buffer"), true)
-	test.strictEqual(Object.hasOwnProperty.call(tokens[0], "_type"), true)
-	test.strictEqual(typeof tokens[0].bufferIndex, "number")
-	test.strictEqual(typeof tokens[0].buffer, "string")
-	test.strictEqual(typeof tokens[0].type, "string")
-	test.done()
-}
+describe("tokenizer", () => {
 
-export function buffer(test) {
-	test.expect(12)
-	test.strictEqual(Tokenizer.tokenize("dsadsads")[0].buffer, "dsadsads")
-	test.strictEqual(Tokenizer.tokenize("x332/{test}/{cxzcxz}")[0].buffer, "x332")
-	test.strictEqual(Tokenizer.tokenize("x332///{test}/cxzcxz}")[1].buffer, "/")
-	test.strictEqual(Tokenizer.tokenize("x332///{test}/cxzcxz}")[2].buffer, "/")
-	test.strictEqual(Tokenizer.tokenize("x332///{test}/cxzcxz}")[3].buffer, "/")
-	test.strictEqual(Tokenizer.tokenize("/test/{test}/{cxzcxz}/")[5].buffer, "{cxzcxz}")
-	test.strictEqual(Tokenizer.tokenize("/{test}/{cxzcxz}/")[1].buffer, "{test}")
-	test.strictEqual(Tokenizer.tokenize("/{test}/{cxzcxz}/")[2].buffer, "/")
-	test.strictEqual(Tokenizer.tokenize("{test}/{cxzcxz}/")[0].buffer, "{test}")
-	test.strictEqual(Tokenizer.tokenize("{test}/{cxzcxz}/regfdgfd")[4].buffer, "regfdgfd")
-	test.strictEqual(Tokenizer.tokenize("/{test}")[0].buffer, "/")
-	test.strictEqual(Tokenizer.tokenize("/{test}")[1].buffer, "{test}")
-	test.done()
-}
+	it("schema", () => {
+		const tokens = Tokenizer.tokenize("/test/{xtest}")
+		assert.ok(tokens instanceof Array)
+		assert.strictEqual(Object.hasOwnProperty.call(tokens[0], "_bufferIndex"), true)
+		assert.strictEqual(Object.hasOwnProperty.call(tokens[0], "_buffer"), true)
+		assert.strictEqual(Object.hasOwnProperty.call(tokens[0], "_type"), true)
+		assert.strictEqual(typeof tokens[0].bufferIndex, "number")
+		assert.strictEqual(typeof tokens[0].buffer, "string")
+		assert.strictEqual(typeof tokens[0].type, "string")
+	})
 
-export function bufferIndex(test) {
-	test.expect(8)
-	test.strictEqual(Tokenizer.tokenize("dsaczxrwqadas")[0].bufferIndex, 0)
-	test.strictEqual(Tokenizer.tokenize("/x332/{test}/{cxzcxz}")[1].bufferIndex, 1)
-	test.strictEqual(Tokenizer.tokenize("x332/{test}/{cxzcxz}")[2].bufferIndex, 5)
-	test.strictEqual(Tokenizer.tokenize("x332///{test}/cxzcxz}")[4].bufferIndex, 7)
-	test.strictEqual(Tokenizer.tokenize("/test/{test}/{cxzcxz}/")[0].bufferIndex, 0)
-	test.strictEqual(Tokenizer.tokenize("/{test}/{cxzcxz}/")[3].bufferIndex, 8)
-	test.strictEqual(Tokenizer.tokenize("{test}/{cxzcxz}/")[0].bufferIndex, 0)
-	test.strictEqual(Tokenizer.tokenize("/{test}")[1].bufferIndex, 1)
-	test.done()
-}
+	it("buffer", () => {
+		assert.strictEqual(Tokenizer.tokenize("dsadsads")[0].buffer, "dsadsads")
+		assert.strictEqual(Tokenizer.tokenize("x332/{test}/{cxzcxz}")[0].buffer, "x332")
+		assert.strictEqual(Tokenizer.tokenize("x332///{test}/cxzcxz}")[1].buffer, "/")
+		assert.strictEqual(Tokenizer.tokenize("x332///{test}/cxzcxz}")[2].buffer, "/")
+		assert.strictEqual(Tokenizer.tokenize("x332///{test}/cxzcxz}")[3].buffer, "/")
+		assert.strictEqual(Tokenizer.tokenize("/test/{test}/{cxzcxz}/")[5].buffer, "{cxzcxz}")
+		assert.strictEqual(Tokenizer.tokenize("/{test}/{cxzcxz}/")[1].buffer, "{test}")
+		assert.strictEqual(Tokenizer.tokenize("/{test}/{cxzcxz}/")[2].buffer, "/")
+		assert.strictEqual(Tokenizer.tokenize("{test}/{cxzcxz}/")[0].buffer, "{test}")
+		assert.strictEqual(Tokenizer.tokenize("{test}/{cxzcxz}/regfdgfd")[4].buffer, "regfdgfd")
+		assert.strictEqual(Tokenizer.tokenize("/{test}")[0].buffer, "/")
+		assert.strictEqual(Tokenizer.tokenize("/{test}")[1].buffer, "{test}")
+	})
 
-export function path(test) {
-	test.expect(5)
-	test.strictEqual(Tokenizer.tokenize("tes")[0].type, Token.TYPE.PATH)
-	test.strictEqual(Tokenizer.tokenize("/tes")[1].type, Token.TYPE.PATH)
-	test.strictEqual(Tokenizer.tokenize("/tes/")[1].type, Token.TYPE.PATH)
-	test.strictEqual(Tokenizer.tokenize("/tes/ds")[1].type, Token.TYPE.PATH)
-	test.strictEqual(Tokenizer.tokenize("/tes/ds")[3].type, Token.TYPE.PATH)
-	test.done()
-}
+	it("bufferIndex", () => {
+		assert.strictEqual(Tokenizer.tokenize("dsaczxrwqadas")[0].bufferIndex, 0)
+		assert.strictEqual(Tokenizer.tokenize("/x332/{test}/{cxzcxz}")[1].bufferIndex, 1)
+		assert.strictEqual(Tokenizer.tokenize("x332/{test}/{cxzcxz}")[2].bufferIndex, 5)
+		assert.strictEqual(Tokenizer.tokenize("x332///{test}/cxzcxz}")[4].bufferIndex, 7)
+		assert.strictEqual(Tokenizer.tokenize("/test/{test}/{cxzcxz}/")[0].bufferIndex, 0)
+		assert.strictEqual(Tokenizer.tokenize("/{test}/{cxzcxz}/")[3].bufferIndex, 8)
+		assert.strictEqual(Tokenizer.tokenize("{test}/{cxzcxz}/")[0].bufferIndex, 0)
+		assert.strictEqual(Tokenizer.tokenize("/{test}")[1].bufferIndex, 1)
+	})
 
-export function parameter(test) {
-	test.expect(7)
-	test.strictEqual(Tokenizer.tokenize("/test/{test}/{cxzcxz}")[3].type, Token.TYPE.PARAMETER)
-	test.strictEqual(Tokenizer.tokenize("/test/{test}/{cxzcxz}/")[5].type, Token.TYPE.PARAMETER)
-	test.strictEqual(Tokenizer.tokenize("/{test}/{cxzcxz}/")[1].type, Token.TYPE.PARAMETER)
-	test.strictEqual(Tokenizer.tokenize("/{test}/{cxzcxz}/")[3].type, Token.TYPE.PARAMETER)
-	test.strictEqual(Tokenizer.tokenize("{test}/{cxzcxz}/")[0].type, Token.TYPE.PARAMETER)
-	test.strictEqual(Tokenizer.tokenize("/{test}")[1].type, Token.TYPE.PARAMETER)
-	test.strictEqual(Tokenizer.tokenize("{test}/{cxzcxz}/regfdgfd")[2].type, Token.TYPE.PARAMETER)
-	test.done()
-}
+	it("path", () => {
+		assert.strictEqual(Tokenizer.tokenize("tes")[0].type, Token.TYPE.PATH)
+		assert.strictEqual(Tokenizer.tokenize("/tes")[1].type, Token.TYPE.PATH)
+		assert.strictEqual(Tokenizer.tokenize("/tes/")[1].type, Token.TYPE.PATH)
+		assert.strictEqual(Tokenizer.tokenize("/tes/ds")[1].type, Token.TYPE.PATH)
+		assert.strictEqual(Tokenizer.tokenize("/tes/ds")[3].type, Token.TYPE.PATH)
+	})
 
-export function invalidParameter(test) {
-	test.expect(3)
-	test.strictEqual(Tokenizer.tokenize("{test")[0].type, Token.TYPE.PATH)
-	test.strictEqual(Tokenizer.tokenize("test}")[0].type, Token.TYPE.PATH)
-	test.strictEqual(Tokenizer.tokenize("/test/{test}/{cxzcxz")[5].type, Token.TYPE.PATH)
-	test.done()
-}
+	it("parameter", () => {
+		assert.strictEqual(Tokenizer.tokenize("/test/{test}/{cxzcxz}")[3].type, Token.TYPE.PARAMETER)
+		assert.strictEqual(Tokenizer.tokenize("/test/{test}/{cxzcxz}/")[5].type, Token.TYPE.PARAMETER)
+		assert.strictEqual(Tokenizer.tokenize("/{test}/{cxzcxz}/")[1].type, Token.TYPE.PARAMETER)
+		assert.strictEqual(Tokenizer.tokenize("/{test}/{cxzcxz}/")[3].type, Token.TYPE.PARAMETER)
+		assert.strictEqual(Tokenizer.tokenize("{test}/{cxzcxz}/")[0].type, Token.TYPE.PARAMETER)
+		assert.strictEqual(Tokenizer.tokenize("/{test}")[1].type, Token.TYPE.PARAMETER)
+		assert.strictEqual(Tokenizer.tokenize("{test}/{cxzcxz}/regfdgfd")[2].type, Token.TYPE.PARAMETER)
+	})
+
+	it("invalidParameter", () => {
+		assert.strictEqual(Tokenizer.tokenize("{test")[0].type, Token.TYPE.PATH)
+		assert.strictEqual(Tokenizer.tokenize("test}")[0].type, Token.TYPE.PATH)
+		assert.strictEqual(Tokenizer.tokenize("/test/{test}/{cxzcxz")[5].type, Token.TYPE.PATH)
+	})
+
+})
