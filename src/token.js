@@ -1,7 +1,5 @@
-/** @module token */
-
 /**
- * @memberof: module:token
+ * @global
  */
 class Token {
 

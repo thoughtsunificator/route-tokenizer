@@ -1,9 +1,7 @@
-/** @module tokenizer */
-
 import Token from "./token.js"
 
 /**
- * @memberof: module:tokenizer
+ * @global
  */
 class Tokenizer {
 
