@@ -17,4 +17,4 @@ const tokens = Tokenizer.tokenize("/account/{id}")
 ````
 ### API
 
-See [https://thoughtsunificator.github.io/route-tokenizer](https://thoughtsunificator.github.io/route-tokenizer).
+See [http://route-tokenizer.unificator.me](http://route-tokenizer.unificator.me).
